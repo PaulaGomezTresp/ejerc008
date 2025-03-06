@@ -47,7 +47,7 @@ public class ProvinciaService {
             personas.addAll(provinciaDetails.getPersona());
             personas.stream().forEach(d -> d.setProvincia(provincia));
 
-            //Do not update the document list in this endpoint
+            
             return provinciaRepository.save(provincia);
         }
         return null;

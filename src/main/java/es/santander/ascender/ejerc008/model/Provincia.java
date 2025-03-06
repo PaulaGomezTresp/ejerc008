@@ -22,7 +22,7 @@ public class Provincia {
     @Length(max = 50)
     private String nombre;
 
-    @OneToMany(orphanRemoval = true, 
+    @OneToMany(orphanRemoval = false, 
                 mappedBy = "provincia", 
                 cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE })
     private List<Persona> persona = new ArrayList<>();
