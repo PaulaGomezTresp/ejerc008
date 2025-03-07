@@ -1,16 +1,11 @@
 package es.santander.ascender.ejerc008.model;
 
-import java.util.ArrayList;
-import java.util.List;
 
-import org.hibernate.validator.constraints.Length;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+
 
 @Entity
 public class Provincia {
@@ -19,22 +14,29 @@ public class Provincia {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Length(max = 50)
+
     private String nombre;
 
-    @OneToMany(orphanRemoval = false, 
-                mappedBy = "provincia", 
-                cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE })
-    private List<Persona> persona = new ArrayList<>();
+    private String codigo;
+
+    private String descripcion;
 
 
-    public List<Persona> getPersona() {
-        return persona;
+    public Provincia() {
     }
 
-    public void setPersona(List<Persona> persona) {
-        this.persona = persona;
+    
+
+
+    public Provincia(Long id, String nombre, String codigo, String descripcion) {
+        this.id = id;
+        this.nombre = nombre;
+        this.codigo = codigo;
+        this.descripcion = descripcion;
     }
+
+
+
 
     public Long getId() {
         return id;
@@ -43,14 +45,39 @@ public class Provincia {
     public void setId(Long id) {
         this.id = id;
     }
-
     public String getNombre() {
-        return nombre; 
-    }    
+        return nombre;
+    }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre; 
-    }  
+        this.nombre = nombre;
+    }
+
+        public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    @Override
+    public String toString() {
+        return "Provincia{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", codigo='" + codigo + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                '}';
+    }
 
     @Override
     public int hashCode() {
@@ -59,7 +86,7 @@ public class Provincia {
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         return result;
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -75,7 +102,6 @@ public class Provincia {
         } else if (!id.equals(other.id))
             return false;
         return true;
-        }
+    }
 
-   
 }
