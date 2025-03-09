@@ -9,7 +9,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import es.santander.ascender.ejerc008.model.Persona;
 import es.santander.ascender.ejerc008.model.Provincia;
+import es.santander.ascender.ejerc008.repository.PersonaRepository;
 import es.santander.ascender.ejerc008.repository.ProvinciaRepository;
 
 @SpringBootApplication
@@ -17,6 +19,9 @@ public class Ejerc008Application {
 
 	@Autowired
     private ProvinciaRepository provinciaRepository;
+
+    @Autowired
+    private PersonaRepository personaRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Ejerc008Application.class, args);
@@ -37,12 +42,13 @@ public class Ejerc008Application {
                         new Provincia(null, "Zaragoza", "50", "Aragón"),
                         new Provincia(null, "Málaga", "29", "Andalucía"),
                         new Provincia(null, "Murcia", "30", "Región de Murcia")
-
+                    
                 );
 
                 // Save the provinces to the database
                 provinciaRepository.saveAll(provincias);
-
+                
+                personaRepository.save(new Persona(null, "luis", "gomez", 45, provincias.get(5), null));
                 System.out.println("Provincias cargadas en la base de datos.");
             } else {
                 System.out.println("Ya existen provincias en la base de datos. No se han cargado.");

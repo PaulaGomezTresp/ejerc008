@@ -1,26 +1,27 @@
 package es.santander.ascender.ejerc008.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
 public class Persona {
 
-    
-
 
     public Persona(Long id, @Size(max = 50) String nombre, @Size(max = 50) String apellidos, @NotNull int edad,
-            Provincia provincia) {
+            Provincia provincia, Usuario usuario) {
         this.id = id;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.edad = edad;
         this.provincia = provincia;
+        this.usuario = usuario;
     }
 
     public Persona() {
@@ -43,6 +44,10 @@ public class Persona {
 
     @ManyToOne
     private Provincia provincia;
+
+    @OneToOne (orphanRemoval = true,
+                cascade =  CascadeType.REMOVE)
+    private Usuario usuario;
  
 
     public Long getId() {
@@ -83,6 +88,7 @@ public class Persona {
     public void setProvincia(Provincia provincia) {
         this.provincia = provincia;
     }
+
 
     @Override
     public int hashCode() {
