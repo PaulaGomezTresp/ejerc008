@@ -1,10 +1,18 @@
 package es.santander.ascender.ejerc008.model;
 
 
+import java.util.List;
+
+import org.hibernate.validator.constraints.Length;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotBlank;
 
 
 @Entity
@@ -14,19 +22,21 @@ public class Provincia {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
+    @Length(max = 50)
     private String nombre;
 
+    @Length(max = 5)
     private String codigo;
 
+    @NotBlank
     private String descripcion;
 
+    @JsonIgnore
+    @OneToMany
+    private List<Persona> persona;
 
     public Provincia() {
     }
-
-    
-
 
     public Provincia(Long id, String nombre, String codigo, String descripcion) {
         this.id = id;
@@ -34,9 +44,6 @@ public class Provincia {
         this.codigo = codigo;
         this.descripcion = descripcion;
     }
-
-
-
 
     public Long getId() {
         return id;
