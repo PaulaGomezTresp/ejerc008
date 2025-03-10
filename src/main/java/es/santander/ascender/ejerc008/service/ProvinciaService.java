@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import es.santander.ascender.ejerc008.repository.PersonaRepository;
 import es.santander.ascender.ejerc008.repository.ProvinciaRepository;
 import es.santander.ascender.ejerc008.model.Provincia;
 
@@ -17,6 +18,9 @@ public class ProvinciaService {
 
     @Autowired
     private ProvinciaRepository provinciaRepository;
+
+    @Autowired
+    private PersonaRepository personaRepository;
 
     /*
      * Los métodos CRUD sobre provinciaRepository
@@ -50,6 +54,10 @@ public class ProvinciaService {
     }
 
     public void deleteProvincia(Long id) {
+    
+        //personaRepository.findAll().forEach(p -> personaRepository.delete(p));
+        personaRepository.limpiaProvincia(id);
+
         provinciaRepository.deleteById(id);
     }
 
